@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>王东东 | 智能建造 · 三维感知与物联开发者</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #eef2f9 0%, #dce5f0 100%);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a2c3e;
+        }
+
+        /* 主卡片 */
+        .portfolio-card {
+            max-width: 1400px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 左右结构 */
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* 左侧 - 个人基础/身份/爱好 + 图片 */
+        .profile-side {
+            flex: 1.1;
+            background: linear-gradient(145deg, #0f2b34, #0a1e26);
+            color: white;
+            padding: 2.2rem 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* 头像图片样式：圆形、带边框、与下方保持间距 */
+        .profile-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.2rem;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.02);
+        }
+
+        .badge-school {
+            background: rgba(255, 200, 120, 0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            padding: 0.3rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(255, 210, 140, 0.6);
+        }
+
+        .name {
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin: 0.3rem 0 0.2rem;
+        }
+
+        .major {
+            font-size: 1rem;
+            background: #ffcd7e30;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            display: inline-block;
+            margin-top: 0.6rem;
+            font-weight: 500;
+        }
+
+        .hobby-group {
+            margin: 1.8rem 0;
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hobby-tag {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .quote-motto {
+            font-style: italic;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            padding-top: 1.2rem;
+            margin-top: 0.8rem;
+            max-width: 260px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        /* 右侧详情区 */
+        .details-side {
+            flex: 2.2;
+            padding: 2rem 2rem 2rem 2rem;
+            background: #ffffff;
+        }
+
+        .bio-header h2 {
+            font-size: 1.7rem;
+            font-weight: 650;
+            background: linear-gradient(120deg, #1e4a6e, #2c7da0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            border-left: 5px solid #2c7da0;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .bio-text {
+            font-size: 1rem;
+            line-height: 1.55;
+            color: #2c3e4f;
+            margin-bottom: 1rem;
+        }
+
+        /* 技能标签 */
+        .skillset {
+            margin: 1.6rem 0 1.6rem;
+        }
+
+        .skillset h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            list-style: none;
+        }
+
+        .skill-pills li {
+            background: #eef2f9;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1b4f6e;
+            border: 1px solid #cddfea;
+            transition: all 0.2s;
+        }
+
+        .skill-pills li:hover {
+            background: #2c7da0;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 项目实践区域 */
+        .research-section {
+            margin: 1.8rem 0 1.5rem;
+        }
+
+        .research-section h3 {
+            font-size: 1.3rem;
+            font-weight: 650;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: #1a3e52;
+        }
+
+        .project-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .project-item {
+            background: #f9fbfe;
+            border-radius: 1.2rem;
+            padding: 1rem 1.2rem;
+            border-left: 6px solid #2c7da0;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .project-item:hover {
+            background: #f2f6fc;
+            transform: translateX(3px);
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #144d66;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-desc {
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: #2c4b60;
+            margin-left: 1.5rem;
+        }
+
+        /* 信息卡片区 */
+        .info-mini-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: #f8fafd;
+            border-radius: 1.2rem;
+            padding: 0.9rem 1.2rem;
+            margin: 1rem 0 1.2rem;
+            justify-content: space-between;
+        }
+
+        .info-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            color: #1e4a6e;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #1f3e4c;
+            color: white;
+            padding: 0.55rem 1.3rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #0e2d3b;
+            transform: translateY(-2px);
+        }
+
+        .footer-note {
+            font-size: 0.7rem;
+            text-align: center;
+            color: #6c8ba0;
+            border-top: 1px solid #e2edf7;
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 780px) {
+            body {
+                padding: 1rem;
+            }
+            .profile-side {
+                padding: 1.6rem;
+            }
+            .name {
+                font-size: 1.8rem;
+            }
+            .details-side {
+                padding: 1.5rem;
+            }
+            .project-desc {
+                margin-left: 0.5rem;
+            }
+            .profile-image {
+                width: 110px;
+                height: 110px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="portfolio-card">
+    <div class="two-columns">
+        <!-- 左侧：王东东 基础信息 + 头像图片 + 健身/羽毛球 -->
+        <div class="profile-side">
+            <!-- 头像图片：位于姓名上方，使用你提供的链接 -->
+            <img class="profile-image" src="https://i.imgs.ovh/2026/04/15/ZGkp6n.jpeg" alt="王东东的照片">
+            
+            <div class="badge-school">🏛️ 湖北工业大学 · 智能建造</div>
+            <div class="name">王东东</div>
+            <div class="major">大一 · 智能建造专业</div>
+            <div class="hobby-group">
+                <span class="hobby-tag">🏋️‍♂️ 健身</span>
+                <span class="hobby-tag">🏸 羽毛球</span>
+            </div>
+            <div class="quote-motto">
+                “ 从三维激光扫描到物联架构，<br>
+                用代码与工程思维重构数字建造未来。”
+            </div>
+        </div>
+
+        <!-- 右侧：详细介绍 + 研究实践(四块内容) -->
+        <div class="details-side">
+            <div class="bio-header">
+                <h2>📐 关于我</h2>
+                <div class="bio-text">
+                    大家好，我是王东东，湖北工业大学智能建造专业大一学生。从大一下学期开始系统投入专业学习与技术探索，
+                    热爱健身与羽毛球，始终保持高能量状态。我相信智能建造的核心在于“感知+连接+分析”，因此我聚焦三维激光扫描、
+                    物联网架构以及网页端数字管理平台的开发，希望能为智慧工地与数字孪生贡献自己的力量。
+                </div>
+                <div class="bio-text">
+                    目前已经掌握 Python、C语言、HTML/CSS、SQL、Git 版本管理以及 Vue 3 基础，持续拓展全栈能力，并用于实际工程问题的解决。
+                </div>
+            </div>
+
+            <!-- 技能标签 -->
+            <div class="skillset">
+                <h3>🧰 技术栈 & 工具</h3>
+                <ul class="skill-pills">
+                    <li>🐍 Python</li>
+                    <li>⚙️ C语言</li>
+                    <li>🎨 HTML5 / CSS3</li>
+                    <li>🗄️ SQL (MySQL/SQLite)</li>
+                    <li>🐙 Git & GitHub</li>
+                    <li>💚 Vue 3</li>
+                    <li>📡 物联网基础</li>
+                    <li>🔍 点云处理概念</li>
+                </ul>
+            </div>
+
+            <!-- 重点：四大研究实践方向 -->
+            <div class="research-section">
+                <h3>🔬 在研实践 · 智能建造技术探索</h3>
+                <div class="project-grid">
+                    <!-- (1) 三维激光扫描仪 -->
+                    <div class="project-item">
+                        <div class="project-title">
+                            <span>📷 01</span> 三维激光扫描仪全流程研究
+                        </div>
+                        <div class="project-desc">
+                            了解多种形式的三维激光扫描仪安装、操作和数据采集与传输基本流程，通过视频、文献等资源去熟悉，收集整理资料。
+                        </div>
+                    </div>
+                    <!-- (2) 点云数据处理 -->
+                    <div class="project-item">
+                        <div class="project-title">
+                            <span>📊 02</span> 点云数据采集与处理流程
+                        </div>
+                        <div class="project-desc">
+                            从基本的滤波、降噪、骨骼化、逆向建模等环节入手，通过视频、文献查阅的方式收集整理资料，掌握点云数据处理的关键技术。
+                        </div>
+                    </div>
+                    <!-- (3) 物联网多源数据架构 -->
+                    <div class="project-item">
+                        <div class="project-title">
+                            <span>🌐 03</span> 物联网多源数据处理与分析架构
+                        </div>
+                        <div class="project-desc">
+                            搭建基于物联网的多源数据处理与分析架构，整理汇总物联网设备组成、不同信号采集所需的传感设备（支撑物联网传输），
+                            了解数据传输接口、数据集成等规范。
+                        </div>
+                    </div>
+                    <!-- (4) 网页数字系统管理平台 二次开发 -->
+                    <div class="project-item">
+                        <div class="project-title">
+                            <span>💻 04</span> 网页版数字系统管理平台开发
+                        </div>
+                        <div class="project-desc">
+                            掌握基本的网页版数字系统管理平台开发流程，获取开源的系统管理平台进行二次开发，重点聚焦采集的多源数据的调用、
+                            动态展示等基本操作，需要熟悉数据库、算法及某一门编程语言（Python / Vue 驱动）。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 补充信息栏 -->
+            <div class="info-mini-cards">
+                <div class="info-chip">📖 从大一下学期起步 · 持续进阶</div>
+                <div class="info-chip">🏆 三维感知 + 物联网 + 全栈雏形</div>
+                <div class="info-chip">🤝 持续学习 · 项目驱动</div>
+            </div>
+
+            <!-- 联系交流按钮 -->
+            <div class="action-buttons">
+                <button class="btn" id="contactEmailBtn">📧 联系交流</button>
+            </div>
+            <div class="footer-note">
+                ✨ 保持好奇 | 从点云到数据面板 | 智能建造探索者 · 王东东
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // 优雅toast提示
+        function showMessage(msg, isError = false) {
+            const toast = document.createElement('div');
+            toast.innerText = msg;
+            toast.style.position = 'fixed';
+            toast.style.bottom = '28px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = isError ? '#c44536' : '#1e3b4c';
+            toast.style.color = '#fff';
+            toast.style.padding = '10px 24px';
+            toast.style.borderRadius = '40px';
+            toast.style.fontSize = '0.85rem';
+            toast.style.fontWeight = '500';
+            toast.style.zIndex = '10000';
+            toast.style.boxShadow = '0 6px 18px rgba(0,0,0,0.2)';
+            toast.style.backdropFilter = 'blur(4px)';
+            toast.style.fontFamily = 'inherit';
+            toast.style.pointerEvents = 'none';
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.25s';
+                setTimeout(() => {
+                    if(toast.parentNode) toast.parentNode.removeChild(toast);
+                }, 250);
+            }, 2100);
+        }
+
+        // 联系交流按钮 - 复制邮箱
+        const emailBtn = document.getElementById('contactEmailBtn');
+        if(emailBtn) {
+            emailBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const contact = "w070225-wdd@qq.com";
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(contact).then(() => {
+                        showMessage(`📋 邮箱已复制: ${contact}`, false);
+                    }).catch(() => {
+                        showMessage(`📧 交流邮箱: ${contact}`, false);
+                    });
+                } else {
+                    showMessage(`📧 交流邮箱: ${contact}`, false);
+                }
+            });
+        }
+
+        // 控制台输出个人风格
+        console.log("%c🏗️ 王东东 | 湖北工业大学 智能建造 · 三维激光+物联网+全栈实践者", "color: #1e4a6e; font-size: 13px; font-weight: bold;");
+        console.log("%c四大方向: 激光扫描/点云处理/物联网架构/网页管理平台二次开发", "color: #2c7da0;");
+    })();
+</script>
+</body>
+</html>
